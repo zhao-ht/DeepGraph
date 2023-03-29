@@ -106,7 +106,7 @@ deepgraph
 ```
 
 
-##Citation
+## Citation
 
 Please kindly cite this paper if our work is useful:
 ```
