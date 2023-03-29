@@ -5,7 +5,7 @@
 
 This is the code of our work [Are More Layers Beneficial to Graph Transformers?](https://openreview.net/pdf?id=uagC-X9XMi8) published on ICLR 2023.
 <div align=center>
-<img src="https://github.com/zhao-ht/DeeoGraph/blob/master/overview.png" width="600px">
+<img src="https://github.com/zhao-ht/DeepGraph/blob/master/overview.png" width="600px">
 </div>
 
 
@@ -61,27 +61,27 @@ cd ..
 We provide the training scripts for ZINC, CLUSTER, PATTERN and PCQM4M-LSC. 
 
 
-####Script for ZINC
+#### Script for ZINC
 ```
 CUDA_VISIBLE_DEVICES=0 python train.py --user-dir ./deepgraph --save-dir ckpts/zinc --ddp-backend=legacy_ddp --dataset-name zinc --dataset-source pyg --data-dir dataset/ --task graph_prediction_substructure --id-type cycle_graph+path_graph+star_graph+k_neighborhood  --ks [8,4,6,2]   --sampling-redundancy 6     --valid-on-test --criterion l1_loss --arch graphormer_slim --deepnorm --num-classes 1 --num-workers 16 --attention-dropout 0.1 --act-dropout 0.1 --dropout 0.0 --optimizer adam --adam-betas '(0.9,0.999)' --adam-eps 1e-8 --clip-norm 5.0 --weight-decay 0.01 --lr-scheduler polynomial_decay --power 1 --warmup-updates 640000 --total-num-update 2560000 --lr 2e-4 --end-learning-rate 1e-6 --batch-size 16 --fp16 --data-buffer-size 20 --encoder-layers 48 --encoder-embed-dim 80 --encoder-ffn-embed-dim 80 --encoder-attention-heads 8 --max-epoch 10000 --keep-best-checkpoints 2 --keep-last-epochs 3  
 
 ```
 
-####Script for CLUSTER
+#### Script for CLUSTER
 
 ```
 CUDA_VISIBLE_DEVICES=0  python train.py   --user-dir ./deepgraph --save-dir ckpts/CLUSTER  --ddp-backend=legacy_ddp --dataset-name CLUSTER --dataset-source pyg --node-level-task  --data-dir dataset/ --task graph_prediction_substructure  --id-type random_walk  --ks [10]    --sampling-redundancy 2   --valid-on-test --criterion node_multiclass_cross_entropy  --arch graphormer_slim  --deepnorm   --num-classes 6    --num-workers 16    --attention-dropout 0.4 --act-dropout 0.4 --dropout 0.4     --optimizer adam --adam-betas '(0.9,0.999)' --adam-eps 1e-8 --clip-norm 5.0 --weight-decay 0.01     --lr-scheduler polynomial_decay --power 1 --warmup-updates 300 --total-num-update 40000     --lr 5e-4 --end-learning-rate 5e-4     --batch-size 64    --fp16     --data-buffer-size 20     --encoder-layers 48     --encoder-embed-dim 48     --encoder-ffn-embed-dim 96     --encoder-attention-heads 8   --max-nodes 1024  --max-epoch 10000 --keep-best-checkpoints 2 --keep-last-epochs 3  --best-checkpoint-metric accuracy --maximize-best-checkpoint-metric 
 
 ```
 
-####Script for PATTERN
+#### Script for PATTERN
 
 ```
 CUDA_VISIBLE_DEVICES=0 python train.py   --user-dir ./deepgraph --save-dir ckpts/PATTERN  --ddp-backend=legacy_ddp     --dataset-name PATTERN     --dataset-source pyg --node-level-task  --data-dir dataset/  --task graph_prediction_substructure --id-type random_walk   --ks [10]   --sampling-redundancy 2   --valid-on-test  --criterion node_multiclass_cross_entropy --arch graphormer_slim  --deepnorm  --num-classes 2    --num-workers 16    --attention-dropout 0.1 --act-dropout 0.1 --dropout 0.0     --optimizer adam --adam-betas '(0.9,0.999)' --adam-eps 1e-8 --clip-norm 5.0 --weight-decay 0.01     --lr-scheduler polynomial_decay --power 1 --warmup-updates 6000 --total-num-update 40000     --lr 2e-4 --end-learning-rate 1e-6     --batch-size 64 --fp16     --data-buffer-size 20     --encoder-layers 48     --encoder-embed-dim 80     --encoder-ffn-embed-dim 80     --encoder-attention-heads 8   --max-nodes 512  --max-epoch 10000 --keep-best-checkpoints 2 --keep-last-epochs 3 --best-checkpoint-metric accuracy --maximize-best-checkpoint-metric  
 
 ```
 
-####Script for PCQM4M
+#### Script for PCQM4M
 ```
 CUDA_VISIBLE_DEVICES=0 python train.py --user-dir ./deepgraph --save-dir  ckpts/pcqm4m  --ddp-backend=legacy_ddp --dataset-name pcqm4m --dataset-source ogb --data-dir dataset/  --task graph_prediction_substructure  --id-type cycle_graph+path_graph+star_graph+k_neighborhood --ks [8,4,6,2]  --sampling-redundancy 6   --criterion l1_loss --arch graphormer_base --deepnorm --num-classes 1 --num-workers 16  --attention-dropout 0.1 --act-dropout 0.1 --dropout 0.0 --optimizer adam --adam-betas '(0.9, 0.999)' --adam-eps 1e-8 --clip-norm 5.0 --weight-decay 0.01 --lr-scheduler polynomial_decay --power 1 --warmup-updates 50000 --total-num-update 500000 --lr 1e-4 --end-learning-rate 1e-5 --batch-size 100 --fp16 --data-buffer-size 20 --encoder-layers 48 --encoder-embed-dim 768 --encoder-ffn-embed-dim 768 --encoder-attention-heads 32 --max-epoch 10000 --keep-best-checkpoints 2 --keep-last-epochs 3 
 
