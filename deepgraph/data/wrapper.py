@@ -158,7 +158,7 @@ def preprocess_item(item,local_attention_on_substructures=False,continuous_featu
 
     #Expand the size of edge_input and spatial_pos
     if local_attention_on_substructures:
-        edge_input_new=(-1*np.ones([N,N,max_dist,1])).astype(np.int64)
+        edge_input_new=(-1*np.ones([N,N,edge_input.shape[2],edge_input.shape[3]])).astype(np.int64)
         edge_input_new[0:item.cur_id,0:item.cur_id,:,:]=edge_input
         edge_input=edge_input_new
         spatial_pos_new=(max_dist_const*torch.ones(N,N)).long()
