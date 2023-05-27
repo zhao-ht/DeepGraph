@@ -113,7 +113,8 @@ Please kindly cite this paper if our work is useful:
 @inproceedings{zhaomore,
   title={Are More Layers Beneficial to Graph Transformers?},
   author={Zhao, Haiteng and Ma, Shuming and Zhang, Dongdong and Deng, Zhi-Hong and Wei, Furu},
-  booktitle={International Conference on Learning Representations}
+  booktitle={International Conference on Learning Representations},
+  year={2022}
 }
 ```
 
